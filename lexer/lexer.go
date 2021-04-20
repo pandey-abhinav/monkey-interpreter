@@ -1,7 +1,6 @@
 package lexer
 
 import (
-	"fmt"
 	"pandey-abhinav/monkey-interpreter/token"
 )
 
@@ -28,7 +27,7 @@ func (l *Lexer) readChar() {
 	l.readPosition += 1
 }
 
-func (l *Lexer) nextToken() token.Token {
+func (l *Lexer) NextToken() token.Token {
 	var tok token.Token
 	l.skipWhitespace()
 
@@ -88,7 +87,6 @@ func (l *Lexer) nextToken() token.Token {
 		if isLetter(l.ch) {
 			tok.Literal = l.readIdentifier()
 			tok.Type = token.LookupIdent(tok.Literal)
-			fmt.Printf("===> token = [%v]\n", tok)
 		} else if isDigit(l.ch) {
 			tok.Type = token.INT
 			tok.Literal = l.readNumber()
@@ -98,7 +96,6 @@ func (l *Lexer) nextToken() token.Token {
 		return tok
 	}
 	l.readChar()
-	fmt.Printf("===> token = [%v]\n", tok)
 	return tok
 }
 

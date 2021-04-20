@@ -2,11 +2,17 @@ package main
 
 import (
 	"fmt"
-	"pandey-abhinav/monkey-interpreter/token"
+	"os"
+	"os/user"
+	"pandey-abhinav/monkey-interpreter/repl"
 )
 
 func main() {
-	fmt.Println("running main ...")
-
-	var tok token.Token
+	user, err := user.Current()
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("Hi %s! Monkey programming language!\n", user.Username)
+	fmt.Printf("you can give commands below :-\n")
+	repl.Start(os.Stdin, os.Stdout)
 }
